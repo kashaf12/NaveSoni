@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.OnIt
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: login
+
                 if (password.getText().toString().equals("naveen@admin") || password.getText().toString().equals("soni@admin")) {
                     Toast.makeText(MainActivity.this, "Welcome" + password.getText().toString(), Toast.LENGTH_SHORT).show();
                     isAuthenticated = true;
