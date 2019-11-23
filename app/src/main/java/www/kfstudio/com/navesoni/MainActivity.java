@@ -258,7 +258,7 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.OnIt
                     startService(new Intent(getApplicationContext(), DeleteService.class)
                             .putExtra(DeleteService.EXTRA_FILE_NAME, documentSnapshot.getString("imageName"))
                             .putExtra(DeleteService.EXTRA_DOCUMENT_NAME, documentSnapshot.getId())
-                            .putExtra(DeleteService.EXTRA_DOCUMENT_URL, documentSnapshot.getString("downloadUrl"))
+                            .putExtra(DeleteService.EXTRA_DOCUMENT_URL, documentSnapshot.getString("thumbnailName"))
                             .setAction(DeleteService.ACTION_DELETE));
                     dialog.dismiss();
                 } else {

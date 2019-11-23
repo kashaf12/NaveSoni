@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -25,6 +26,8 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+
+import java.io.File;
 
 import www.kfstudio.com.navesoni.adapters.ImageAdapter;
 import www.kfstudio.com.navesoni.models.FileModal;
@@ -108,13 +111,14 @@ public class CategoryActivity extends AppCompatActivity implements ImageAdapter.
         Button downlaod = dialog.findViewById(R.id.download);
         ImageView delete = dialog.findViewById(R.id.delete);
         Glide.with(getApplicationContext())
-                .load(documentSnapshot.getString("downloadUrl"))
+                .load(documentSnapshot.getString("imageUrl"))
                 .fitCenter()
                 .placeholder(R.drawable.progress_animation)
                 .useAnimationPool(true)
                 .into(image);
         isAuthenticated = sharedpreferences.getBoolean("isAuthenticated", false);
         if (isAuthenticated) {
+
             delete.setVisibility(View.VISIBLE);
         } else {
             delete.setVisibility(View.GONE);
@@ -128,6 +132,7 @@ public class CategoryActivity extends AppCompatActivity implements ImageAdapter.
                     startService(new Intent(getApplicationContext(), DeleteService.class)
                             .putExtra(DeleteService.EXTRA_FILE_NAME, documentSnapshot.getString("imageName"))
                             .putExtra(DeleteService.EXTRA_DOCUMENT_NAME, documentSnapshot.getId())
+                            .putExtra(DeleteService.EXTRA_DOCUMENT_URL, documentSnapshot.getString("thumbnailName"))
                             .setAction(DeleteService.ACTION_DELETE));
                     dialog.dismiss();
                 } else {
@@ -139,16 +144,29 @@ public class CategoryActivity extends AppCompatActivity implements ImageAdapter.
             @Override
             public void onClick(View v) {
                 if (helper.isNetworkAvailable(getApplicationContext())) {
+                    File rootPath = new File(Environment.getExternalStorageDirectory(), "NaveSoni");
+                    if (!rootPath.exists()) {
+                        rootPath.mkdirs();
+                    }
 
+                    final File localFile = new File(rootPath, documentSnapshot.getString("imageName"));
+                    if (localFile.exists()) {
+                        Toast.makeText(CategoryActivity.this, "Already Downloaded", Toast.LENGTH_SHORT).show();
+                    } else {
+                        final String path = localFile.getAbsolutePath();
 
-                    Intent intent = new Intent(getApplicationContext(), DownloadService.class)
-                            .putExtra(DownloadService.EXTRA_DOWNLOAD_PATH, documentSnapshot.getString("downloadUrl"))
-                            .setAction(DownloadService.ACTION_DOWNLOAD);
-                    startService(intent);
-                    dialog.dismiss();
+                        Intent intent = new Intent(getApplicationContext(), DownloadService.class)
+                                .putExtra(DownloadService.EXTRA_DOWNLOAD_PATH, documentSnapshot.getString("downloadUrl"))
+                                .putExtra(DownloadService.EXTRA_FILE_DOWNLOADED, path)
+                                .setAction(DownloadService.ACTION_DOWNLOAD);
+                        startService(intent);
+                        dialog.dismiss();
+                    }
                 } else {
                     Toast.makeText(CategoryActivity.this, "No Internet", Toast.LENGTH_SHORT).show();
                 }
+
+
             }
         });
 

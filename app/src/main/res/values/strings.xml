@@ -1,20 +1,8 @@
 <resources>
     <string name="app_name">NaveSoni</string>
 
-    <string name="camera_button_text">Upload</string>
-    <string name="sign_in_prompt">Sign In to begin</string>
-    <string name="take_photo_prompt">Upload a Photo</string>
-    <string name="download">Download</string>
-    <string name="sign_in_anonymously">Sign In</string>
-    <string name="rationale_storage">This sample reads images from your camera to demonstrate uploading.</string>
-    <string name="label_link">Link to Uploaded File</string>
-    <string name="label_download">Download File</string>
-    <string name="log_out">Log out</string>
-    <string name="success">Success</string>
-
     <string name="progress_downloading">Downloading…</string>
     <string name="progress_uploading">Uploading…</string>
-    <string name="progress_auth">Signing In…</string>
 
     <string name="upload_success">Upload finished</string>
     <string name="upload_failure">Upload failed</string>\
@@ -23,7 +11,6 @@
     <string name="download_failure">Download failure</string>
 
     <string name="delete_success">Delete finished Successfully</string>
-    <string name="delete_failure">Download Failed</string>
 
     <string name="naveenAbout">I was born on ----. I from samastipur in bihar my higher qualifications is ----------- . i am worked in bank of baroda bank as on Branch Manager .I came from well disciplined family so I maintain discipline and punctuality.</string>
     <string name="soniAbout">I was born on 5th of Feburary, 1992.I belong from bihar samastipur.

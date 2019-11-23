@@ -63,7 +63,6 @@
             android:textSize="12sp" />
 
         <View
-            android:id="@+id/viewLine3"
             android:layout_width="match_parent"
             android:layout_height="2dip"
             android:layout_marginTop="4dp"
