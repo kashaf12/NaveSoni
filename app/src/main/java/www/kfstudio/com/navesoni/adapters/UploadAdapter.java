@@ -127,6 +127,7 @@ public class UploadAdapter extends RecyclerView.Adapter<UploadAdapter.ViewHolder
             categories.add("naveen");
             categories.add("soni");
             categories.add("engagement");
+            categories.add("honeymoon");
 
             // Creating adapter for spinner
             ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, categories);

@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.OnIt
     private ImageAdapter imageAdapter;
     private CollectionReference dbr = db.collection("Images");
     private BroadcastReceiver mBroadcastReceiver;
-    private CardView cv_wedding, cv_engagement, cv_mehndi, cv_soni, cv_naveen, cv_reception;
+    private CardView cv_wedding, cv_engagement, cv_mehndi, cv_soni, cv_naveen, cv_reception, cv_honeymoon;
 
 
     @Override
@@ -70,6 +70,15 @@ public class MainActivity extends AppCompatActivity implements ImageAdapter.OnIt
         cv_soni = findViewById(R.id.soniCardView);
         cv_naveen = findViewById(R.id.naveenCardView);
         cv_reception = findViewById(R.id.receptionCardView);
+        cv_honeymoon = findViewById(R.id.honeymoonCardView);
+        cv_honeymoon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CategoryActivity.class);
+                intent.putExtra(CategoryActivity.TITLE, CategoryActivity.TITLE_HONEYMOON);
+                startActivity(intent);
+            }
+        });
         cv_wedding.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

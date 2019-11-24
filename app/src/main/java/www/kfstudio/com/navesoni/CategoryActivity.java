@@ -42,6 +42,7 @@ public class CategoryActivity extends AppCompatActivity implements ImageAdapter.
     public static final String TITLE_MEHNDI = "mehndi";
     public static final String TITLE_ENGAGEMENT = "engagement";
     public static final String TITLE = "title";
+    public static final String TITLE_HONEYMOON = "honeymoon";
     public static final String MyPREFERENCES = "MyPrefs";
     SharedPreferences sharedpreferences;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -77,6 +78,9 @@ public class CategoryActivity extends AppCompatActivity implements ImageAdapter.
                 break;
             case TITLE_RECEPTION:
                 imageView.setImageDrawable(getDrawable(R.drawable.reception));
+                break;
+            case TITLE_HONEYMOON:
+                imageView.setImageDrawable(getDrawable(R.drawable.honeymoon));
                 break;
             default:
                 imageView.setImageDrawable(getDrawable(R.drawable.wedding));
